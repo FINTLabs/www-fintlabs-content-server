@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.version: 1.16.0 (HEAD)
+  labels:
+    io.kompose.service: www-fintlabs
+  name: www-fintlabs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: www-fintlabs
+  template:
+    metadata:
+      labels:
+        io.kompose.service: www-fintlabs
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: content
+          image: www-fintlabs:4.8.2
+          ports:
+            - containerPort: 3000
+        - name: frontend
+          image: sdasdfasdf
+          ports:
+            - containerPort: 80
