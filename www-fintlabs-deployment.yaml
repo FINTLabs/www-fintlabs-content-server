@@ -9,7 +9,10 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   selector:
     matchLabels:
       io.kompose.service: www-fintlabs
@@ -21,10 +24,18 @@ spec:
       restartPolicy: Always
       containers:
         - name: content
-          image: www-fintlabs:4.8.2
+          image: fintlabs.azurecr.io/www-fintlabs-content-server:build.1
           ports:
             - containerPort: 3000
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "500m"
         - name: frontend
-          image: sdasdfasdf
+          image: fintlabs.azurecr.io/www-fintlabs-frontend:build.3
           ports:
             - containerPort: 80
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "500m"

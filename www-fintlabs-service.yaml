@@ -9,8 +9,6 @@ metadata:
   name: www-fintlabs
 spec:
   ports:
-    - name: "3000"
-      port: 3000
     - name: "80"
       port: 80
   type: LoadBalancer
